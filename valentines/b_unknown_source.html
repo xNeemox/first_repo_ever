@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Happy Valentines Mama ♥</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, 'Times New Roman', serif;
+      background: linear-gradient(135deg, #ffe6f0 0%, #ffcce0 35%, #ffb3d9 65%, #ff99cc 100%);
+      padding: 20px;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .side-gif {
+      width: 120px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 3px solid #ff85a2;
+      box-shadow: 0 8px 24px rgba(255, 105, 150, 0.3);
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 12px; }
+      .page-wrap { gap: 12px; }
+      .side-gif { width: 70px; height: 70px; }
+      .card {
+        padding: 28px 20px;
+        border-radius: 20px;
+      }
+      .roses { font-size: 2rem; margin-bottom: 12px; }
+      h1 { font-size: 1.4rem; margin-bottom: 16px; }
+      .photo-box {
+        min-height: 160px;
+        max-width: 100%;
+        margin-bottom: 16px;
+      }
+      .photo-box .photo { min-height: 160px; }
+      .chocolates { font-size: 1.6rem; margin-top: 12px; }
+    }
+
+    @media (max-width: 380px) {
+      body { padding: 8px; }
+      .card { padding: 24px 16px; }
+      .roses { font-size: 1.75rem; }
+      h1 { font-size: 1.25rem; }
+      .photo-box { min-height: 140px; }
+      .photo-box .photo { min-height: 140px; }
+    }
+
+    .card {
+      max-width: 420px;
+      width: 100%;
+      background: linear-gradient(180deg, #fff 0%, #fff5f8 50%, #ffecf2 100%);
+      border-radius: 24px;
+      padding: 48px 36px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(255, 105, 150, 0.25), 0 0 0 1px rgba(255, 182, 193, 0.5);
+      border: 3px solid #ff85a2;
+      position: relative;
+    }
+
+    .roses {
+      font-size: 2.5rem;
+      letter-spacing: 6px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .roses span {
+      display: inline-block;
+      animation: roseBounce 1.2s ease-in-out infinite;
+    }
+    .roses span:nth-child(1) { animation-delay: 0s; }
+    .roses span:nth-child(2) { animation-delay: 0.2s; }
+    .roses span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes roseBounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-8px) scale(1.1); }
+    }
+
+    h1 {
+      color: #c41e5a;
+      font-size: 1.75rem;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 2px rgba(196, 30, 90, 0.15);
+    }
+
+    /* INSERT YOUR PHOTO: use the .photo-box below and add <img src="your-photo.jpg" alt="Photo" class="photo"> inside it */
+    .photo-box {
+      min-height: 200px;
+      margin: 0 auto 20px;
+      max-width: 280px;
+      border-radius: 16px;
+      border: 3px dashed #ff85a2;
+      background: linear-gradient(145deg, #fff9fb 0%, #ffe6f0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .photo-box .photo {
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      max-width: 280px;
+      object-fit: cover;
+      border: none;
+      border-radius: 13px;
+    }
+
+    .photo-box .placeholder {
+      color: #e63972;
+      font-size: 0.9rem;
+      padding: 16px;
+      text-align: center;
+    }
+    .photo-box:has(.photo) .placeholder { display: none; }
+
+    .chocolates {
+      font-size: 2rem;
+      letter-spacing: 4px;
+      margin-top: 16px;
+    }
+
+    /* Extra pink accents */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #ff69b4 0%, #ff85a2 25%, #e63972 50%, #ff85a2 75%, #ff69b4 100%);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .roses span { filter: drop-shadow(0 2px 4px rgba(255, 105, 180, 0.3)); }
+    .chocolates { filter: drop-shadow(0 2px 4px rgba(255, 182, 193, 0.4)); }
+
+    /* Falling petals and hearts */
+    .falling-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      top: -8%;
+      width: 14px;
+      height: 20px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      opacity: 0.85;
+      animation: fall linear infinite;
+    }
+    .petal.pink {
+      background: linear-gradient(135deg, #ffb3d9 0%, #ff85a2 100%);
+      box-shadow: 0 1px 3px rgba(255, 105, 180, 0.3);
+    }
+    .petal.red {
+      background: linear-gradient(135deg, #e63972 0%, #c41e5a 100%);
+      box-shadow: 0 1px 3px rgba(196, 30, 90, 0.3);
+    }
+
+    .heart {
+      position: absolute;
+      top: -8%;
+      font-size: 18px;
+      opacity: 0.8;
+      animation: fall linear infinite;
+      color: #c41e5a;
+      text-shadow: 0 1px 2px rgba(196, 30, 90, 0.4);
+    }
+    .heart span { display: inline-block; }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(105vh) translateX(30px) rotate(360deg);
+        opacity: 0.6;
+      }
+    }
+    @keyframes fallLeft {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(105vh) translateX(-25px) rotate(-360deg);
+        opacity: 0.6;
+      }
+    }
+
+    /* Stagger positions and timings so they fall continuously */
+    .petal:nth-child(1)  { left: 5%;  animation-duration: 11s; animation-delay: 0s; }
+    .petal:nth-child(2)  { left: 18%; animation-duration: 13s; animation-delay: -2s;  animation-name: fallLeft; }
+    .petal:nth-child(3)  { left: 28%; animation-duration: 9s;  animation-delay: -4s;  }
+    .petal:nth-child(4)  { left: 42%; animation-duration: 12s; animation-delay: -1s;  animation-name: fallLeft; }
+    .petal:nth-child(5)  { left: 55%; animation-duration: 10s; animation-delay: -5s;  }
+    .petal:nth-child(6)  { left: 68%; animation-duration: 14s; animation-delay: -3s;  animation-name: fallLeft; }
+    .petal:nth-child(7)  { left: 78%; animation-duration: 11s; animation-delay: -6s;  }
+    .petal:nth-child(8)  { left: 88%; animation-duration: 9s;  animation-delay: -1s;  animation-name: fallLeft; }
+    .petal:nth-child(9)  { left: 12%; animation-duration: 13s; animation-delay: -7s;  }
+    .petal:nth-child(10) { left: 35%; animation-duration: 10s; animation-delay: -8s;  animation-name: fallLeft; }
+    .petal:nth-child(11) { left: 62%; animation-duration: 12s; animation-delay: -4s;  }
+    .petal:nth-child(12) { left: 82%; animation-duration: 9s;  animation-delay: -9s;  animation-name: fallLeft; }
+    .petal:nth-child(13) { left: 22%; animation-duration: 11s; animation-delay: -10s; }
+    .petal:nth-child(14) { left: 48%; animation-duration: 14s; animation-delay: -5s;  animation-name: fallLeft; }
+    .petal:nth-child(15) { left: 72%; animation-duration: 10s; animation-delay: -11s; }
+
+    .heart:nth-child(16) { left: 8%;  animation-duration: 12s; animation-delay: 0s;   }
+    .heart:nth-child(17) { left: 25%; animation-duration: 10s; animation-delay: -2s;  animation-name: fallLeft; }
+    .heart:nth-child(18) { left: 38%; animation-duration: 14s; animation-delay: -4s;  }
+    .heart:nth-child(19) { left: 52%; animation-duration: 9s;  animation-delay: -6s;  animation-name: fallLeft; }
+    .heart:nth-child(20) { left: 65%; animation-duration: 11s; animation-delay: -1s;  }
+    .heart:nth-child(21) { left: 75%; animation-duration: 13s; animation-delay: -8s;  animation-name: fallLeft; }
+    .heart:nth-child(22) { left: 92%; animation-duration: 10s; animation-delay: -3s;  }
+    .heart:nth-child(23) { left: 15%; animation-duration: 12s; animation-delay: -7s;  animation-name: fallLeft; }
+    .heart:nth-child(24) { left: 45%; animation-duration: 11s; animation-delay: -9s;  }
+    .heart:nth-child(25) { left: 58%; animation-duration: 13s; animation-delay: -5s;  animation-name: fallLeft; }
+
+    .music-hint {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      background: rgba(196, 30, 90, 0.9);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 24px;
+      font-size: 0.9rem;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .music-hint.played { opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <!-- Music: put ed_sheeran.mp3 in the same folder as this HTML -->
+  <audio id="bg-music" src="ed_sheeran.mp3" autoplay loop></audio>
+
+  <!-- Falling rose petals (red & pink) and hearts -->
+  <div class="falling-container" aria-hidden="true">
+    <div class="petal pink"></div>
+    <div class="petal red"></div>
+    <div class="petal pink"></div>
+    <div class="petal red"></div>
+    <div class="petal pink"></div>
+    <div class="petal red"></div>
+    <div class="petal pink"></div>
+    <div class="petal red"></div>
+    <div class="petal pink"></div>
+    <div class="petal red"></div>
+    <div class="petal pink"></div>
+    <div class="petal red"></div>
+    <div class="petal pink"></div>
+    <div class="petal red"></div>
+    <div class="petal pink"></div>
+    <span class="heart"><span>♥</span></span>
+    <span class="heart"><span>❤</span></span>
+    <span class="heart"><span>♥</span></span>
+    <span class="heart"><span>❤</span></span>
+    <span class="heart"><span>♥</span></span>
+    <span class="heart"><span>❤</span></span>
+    <span class="heart"><span>♥</span></span>
+    <span class="heart"><span>❤</span></span>
+    <span class="heart"><span>♥</span></span>
+    <span class="heart"><span>❤</span></span>
+  </div>
+
+  <div class="page-wrap">
+    <!-- Left: funny Valentine GIF (replace src with your own if you want) -->
+    <img class="side-gif" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXU2ZHg2OHhvc2xxdW04dmN3aXBsZzMwYXNmM2prODRleTBzbnNhOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WK7omsLop0431tZjXb/giphy.gif" alt="Hearts">
+
+    <div class="card">
+      <p class="roses">
+        <span>🌹</span><span>🌹</span><span>🌹</span>
+      </p>
+      <h1>Happy Valentines Mama 🥰</h1>
+
+      <!-- INSERT YOUR IMAGE OR GIF HERE: Add <img src="your-photo.jpg" alt="Photo" class="photo"> inside the div below and remove the placeholder paragraph -->
+      <div class="photo-box">
+        <p class="placeholder">Your photo or gif goes here<br>(see comment in code)</p>
+         <img src="mama.jpg" alt="Photo" class="photo"> 
+      </div>
+
+      <p class="chocolates">🍫 🍫 🍫</p>
+    </div>
+
+    <!-- Right: funny Valentine GIF (replace src with your own if you want) -->
+    <img class="side-gif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGlxN2U2aXc5NGNjNW44dnJocjdqd20wN3RrY3Z1eGp0eGxzMDI3dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9n0CvokbUMaWhFuCkp/giphy.gif" alt="Love">
+  </div>
+
+  <!-- Tap hint for music (hidden after play) -->
+  <div id="music-hint" class="music-hint">Tap to play music ♪</div>
+
+  <script>
+    (function() {
+      var audio = document.getElementById('bg-music');
+      var hint = document.getElementById('music-hint');
+      if (!audio) return;
+
+      function tryPlay() {
+        audio.play().then(function() {
+          if (hint) hint.classList.add('played');
+        }).catch(function() {});
+      }
+
+      // Try autoplay first (works on some desktop browsers)
+      tryPlay();
+
+      // On mobile, music usually needs a user gesture – use both touch and click
+      function onFirstInteraction() {
+        tryPlay();
+        document.body.removeEventListener('touchstart', onFirstInteraction);
+        document.body.removeEventListener('touchend', onFirstInteraction);
+        document.body.removeEventListener('click', onFirstInteraction);
+      }
+      document.body.addEventListener('touchstart', onFirstInteraction, { passive: true });
+      document.body.addEventListener('touchend', onFirstInteraction, { once: true });
+      document.body.addEventListener('click', onFirstInteraction, { once: true });
+    })();
+  </script>
+</body>
+</html>
