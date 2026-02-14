@@ -341,27 +341,41 @@
       var audio = document.getElementById('bg-music');
       var hint = document.getElementById('music-hint');
       if (!audio) return;
-
+    
+      var hasPlayed = false;
+    
       function tryPlay() {
+        if (hasPlayed) return;
+        
         audio.play().then(function() {
-          if (hint) hint.classList.add('played');
-        }).catch(function() {});
+          hasPlayed = true;
+          if (hint) {
+            hint.classList.add('played');
+          }
+        }).catch(function(err) {
+          console.log('Autoplay prevented:', err);
+        });
       }
-
-      // Try autoplay first (works on some desktop browsers)
+    
+      // Try autoplay (usually only works on desktop)
       tryPlay();
-
-      // On mobile, music usually needs a user gesture – use both touch and click
-      function onFirstInteraction() {
+    
+      // Listen for ANY user interaction on mobile
+      function onFirstInteraction(e) {
         tryPlay();
-        document.body.removeEventListener('touchstart', onFirstInteraction);
-        document.body.removeEventListener('touchend', onFirstInteraction);
-        document.body.removeEventListener('click', onFirstInteraction);
+        // Remove all listeners after first successful play
+        if (hasPlayed) {
+          document.removeEventListener('touchstart', onFirstInteraction);
+          document.removeEventListener('click', onFirstInteraction);
+          document.removeEventListener('touchend', onFirstInteraction);
+        }
       }
-      document.body.addEventListener('touchstart', onFirstInteraction, { passive: true });
-      document.body.addEventListener('touchend', onFirstInteraction, { once: true });
-      document.body.addEventListener('click', onFirstInteraction, { once: true });
+    
+      // Use capture phase to ensure we catch the event
+      document.addEventListener('touchstart', onFirstInteraction, { passive: true, capture: true });
+      document.addEventListener('click', onFirstInteraction, { capture: true });
+      document.addEventListener('touchend', onFirstInteraction, { once: true, capture: true });
     })();
-  </script>
+    </script>
 </body>
 </html>
